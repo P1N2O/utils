@@ -18,7 +18,7 @@
 /**
  * User Agent Info
  */
-export type UserAgentInfo = {
+type UserAgentInfo = {
   browser: {
     name: string | null;
     version: string | null;
@@ -58,7 +58,7 @@ export type UserAgentInfo = {
  * console.log(ua)
  * ```
  */
-export function parseUserAgent(userAgent: string): UserAgentInfo {
+function parseUserAgent(userAgent: string): UserAgentInfo {
   const browserRegex =
     /(Chrome|Firefox|Safari|Opera|Edge|MSIE|Trident)\/([\d.]+)/;
   const osRegex = /(Windows NT|Mac OS X|Android|Linux|iOS)\s*([\d._]*)/;
@@ -108,3 +108,5 @@ export function parseUserAgent(userAgent: string): UserAgentInfo {
     ua: userAgent,
   };
 }
+
+export { parseUserAgent, type UserAgentInfo };
