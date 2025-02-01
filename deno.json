@@ -1,0 +1,31 @@
+{
+  "name": "@p1n2o/utils",
+  "description": "A collection of utility functions for common JavaScript/TypeScript tasks",
+  "version": "0.1.0",
+  "author": {
+    "name": "Manuel Pinto",
+    "email": "manuel@pinto.dev"
+  },
+  "tasks": {
+    "start": "deno run --watch -A playground.ts",
+    "format": "deno fmt",
+    "lint": "deno lint"
+  },
+  "imports": {
+    "@p1n2o/utils": "./mod.ts"
+  },
+  "exports": {
+    ".": "./mod.ts",
+    "./user-agent": "./lib/user-agent/main.ts"
+  },
+  "exclude": [
+    ".git",
+    ".github",
+    ".cache",
+    ".vscode",
+    "playground.ts"
+  ],
+  "compilerOptions": {
+    "strict": true
+  }
+}
