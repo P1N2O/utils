@@ -9,13 +9,15 @@
   "tasks": {
     "start": "deno run --watch -A playground.ts",
     "format": "deno fmt",
-    "lint": "deno lint"
+    "lint": "deno lint",
+    "publish": "deno run --allow-read --allow-run publish.ts"
   },
   "imports": {
-    "@commitlint/cli": "npm:@commitlint/cli@^19.6.1",
-    "@commitlint/config-conventional": "npm:@commitlint/config-conventional@^19.6.0",
+    "@commitlint/cli": "npm:@commitlint/cli",
+    "@commitlint/config-conventional": "npm:@commitlint/config-conventional",
+    "@commitlint/types": "npm:@commitlint/types",
     "@p1n2o/utils": "./mod.ts",
-    "lefthook": "npm:lefthook@^1.10.10"
+    "lefthook": "npm:lefthook"
   },
   "exports": {
     ".": "./mod.ts",

@@ -1,10 +1,10 @@
 {
   "version": "4",
   "specifiers": {
-    "npm:@commitlint/cli@^19.6.1": "19.6.1",
-    "npm:@commitlint/config-conventional@^19.6.0": "19.6.0",
-    "npm:commitlint@*": "19.6.1",
-    "npm:lefthook@^1.10.10": "1.10.10"
+    "npm:@commitlint/cli@*": "19.6.1",
+    "npm:@commitlint/config-conventional@*": "19.6.0",
+    "npm:@commitlint/types@*": "19.5.0",
+    "npm:lefthook@*": "1.10.10"
   },
   "npm": {
     "@babel/code-frame@7.26.2": {
@@ -218,13 +218,6 @@
     },
     "color-name@1.1.4": {
       "integrity": "sha512-dOy+3AuW3a2wNbZHIuMZpTcgjGuLU/uBL/ubcZF9OXbDo8ff4O8yVp5Bf0efS8uEoYo5q4Fx7dY9OgQGXgAsQA=="
-    },
-    "commitlint@19.6.1": {
-      "integrity": "sha512-tU4or+Y2fDXepCZ44o8guEB9uwrRp4if4VupGH1CR+bsVS2zX6Gia4dndA7UPx8cWWw1tvRRJu5keA7RqfXf3w==",
-      "dependencies": [
-        "@commitlint/cli",
-        "@commitlint/types"
-      ]
     },
     "compare-func@2.0.0": {
       "integrity": "sha512-zHig5N+tPWARooBnb0Zx1MFcdfpyJrfTJ3Y5L+IFvUm8rM74hHz66z0gw0x4tijh5CorKkKUCnW82R2vmpeCRA==",
@@ -579,9 +572,10 @@
   },
   "workspace": {
     "dependencies": [
-      "npm:@commitlint/cli@^19.6.1",
-      "npm:@commitlint/config-conventional@^19.6.0",
-      "npm:lefthook@^1.10.10"
+      "npm:@commitlint/cli@*",
+      "npm:@commitlint/config-conventional@*",
+      "npm:@commitlint/types@*",
+      "npm:lefthook@*"
     ]
   }
 }
