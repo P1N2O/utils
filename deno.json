@@ -12,20 +12,27 @@
     "lint": "deno lint"
   },
   "imports": {
-    "@p1n2o/utils": "./mod.ts"
+    "@commitlint/cli": "npm:@commitlint/cli@^19.6.1",
+    "@commitlint/config-conventional": "npm:@commitlint/config-conventional@^19.6.0",
+    "@p1n2o/utils": "./mod.ts",
+    "lefthook": "npm:lefthook@^1.10.10"
   },
   "exports": {
     ".": "./mod.ts",
     "./user-agent": "./lib/user-agent/main.ts"
   },
-  "exclude": [
-    ".git",
-    ".github",
-    ".cache",
-    ".vscode",
-    "playground.ts"
-  ],
+  "publish": {
+    "exclude": [
+      "node_modules",
+      ".git",
+      ".github",
+      ".cache",
+      ".vscode",
+      "playground.ts"
+    ]
+  },
   "compilerOptions": {
     "strict": true
-  }
+  },
+  "nodeModulesDir": "auto"
 }

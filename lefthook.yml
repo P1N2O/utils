@@ -1,0 +1,16 @@
+# https://lefthook.dev/configuration/
+
+pre-commit:
+  parallel: true
+  stage_fixed: true
+  commands:
+    "format code":
+      run: deno fmt {staged_files}
+    "lint code":
+      run: deno lint {staged_files}
+      glob: "*.{js,cjs,mjs,ts,cts,mts,jsx,tsx}"
+
+commit-msg:
+  commands:
+    "lint commit":
+      run: deno run -A npm:commitlint --edit {1}
