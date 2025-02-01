@@ -6,6 +6,7 @@ pre-commit:
   commands:
     "format code":
       run: deno fmt {staged_files}
+      glob: "*.{js,cjs,mjs,ts,cts,mts,jsx,tsx,md,mkd,mkdn,mdwn,mdown,markdown,json,jsonc,css,html,njk,vto,yml,yaml,sass,scss,less,ipynb,astro,svelte,vue,sql}"
     "lint code":
       run: deno lint {staged_files}
       glob: "*.{js,cjs,mjs,ts,cts,mts,jsx,tsx}"
