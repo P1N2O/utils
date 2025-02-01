@@ -10,6 +10,20 @@
  *
  * const ua = parse("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36")
  * console.log(ua)
+ * // Outputs:
+// {
+//   browser: { name: "Chrome", version: "58.0.3029.110", version_major: 58 },
+//   device: { brand: null, model: null, name: "Other" },
+//   os: { name: "Windows NT", version: "10.0", version_major: 10 },
+//   type: {
+//     bot: false,
+//     mobile: false,
+//     pc: true,
+//     tablet: false,
+//     touch_capable: false
+//   },
+//   ua: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36"
+// }
  * ```
  *
  * @module
