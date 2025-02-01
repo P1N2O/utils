@@ -14,4 +14,4 @@ pre-commit:
 commit-msg:
   commands:
     "lint commit":
-      run: deno run -A npm:commitlint --edit {1}
+      run: deno run -A npm:@commitlint/cli --edit {1}
