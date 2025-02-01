@@ -2,30 +2,29 @@
 // This code is licensed under MIT license (see LICENSE for details)
 
 /**
- * This module contains utility functions related to {@link https://en.wikipedia.org/wiki/User-Agent_header | user agents}.
+ * This module contains utility functions related to {@link https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/User-Agent | user agent}.
  *
- * @example Usage
+ *  * @example Usage
  * ```ts ignore
- * import { parse } from "@p1n2o/utils/user-agent";
+ * import { parseUserAgent, randomUserAgent } from "@p1n2o/utils/user-agent";
  *
- * const ua = parse("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36")
+ * const ua = parseUserAgent(randomUserAgent)
  * console.log(ua)
  * // Outputs:
-// {
-//   browser: { name: "Chrome", version: "58.0.3029.110", version_major: 58 },
-//   device: { brand: null, model: null, name: "Other" },
-//   os: { name: "Windows NT", version: "10.0", version_major: 10 },
-//   type: {
-//     bot: false,
-//     mobile: false,
-//     pc: true,
-//     tablet: false,
-//     touch_capable: false
-//   },
-//   ua: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36"
-// }
+ * // {
+ * //   browser: { name: "Chrome", version: "58.0.3029.110", version_major: 58 },
+ * //   device: { brand: null, model: null, name: "Other" },
+ * //   os: { name: "Windows NT", version: "10.0", version_major: 10 },
+ * //   type: {
+ * //     bot: false,
+ * //     mobile: false,
+ * //     pc: true,
+ * //     tablet: false,
+ * //     touch_capable: false
+ * //   },
+ * //   ua: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36"
+ * // }
  * ```
- *
  * @module
  */
 
@@ -59,10 +58,10 @@ type UserAgentInfo = {
 };
 
 /**
- * Parse a user agent string into a structured object (UserAgentInfo).
+ * Parse a user agent string into {@link UserAgentInfo}.
  *
  * @param userAgent The user agent (string) value to parse.
- * @returns {UserAgentInfo} Returns the parsed user agent object.
+ * @returns {UserAgentInfo} Returns the parsed user agent object (UserAgentInfo).
  *
  * @example Usage
  * ```ts ignore
@@ -70,6 +69,20 @@ type UserAgentInfo = {
  *
  * const ua = parseUserAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36")
  * console.log(ua)
+ * // Outputs:
+ * // {
+ * //   browser: { name: "Chrome", version: "58.0.3029.110", version_major: 58 },
+ * //   device: { brand: null, model: null, name: "Other" },
+ * //   os: { name: "Windows NT", version: "10.0", version_major: 10 },
+ * //   type: {
+ * //     bot: false,
+ * //     mobile: false,
+ * //     pc: true,
+ * //     tablet: false,
+ * //     touch_capable: false
+ * //   },
+ * //   ua: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36"
+ * // }
  * ```
  */
 function parseUserAgent(userAgent: string): UserAgentInfo {
@@ -123,4 +136,34 @@ function parseUserAgent(userAgent: string): UserAgentInfo {
   };
 }
 
-export { parseUserAgent, type UserAgentInfo };
+/**
+ * Generate a random user agent.
+ * @returns {string} Returns a random user agent string.
+ *
+ * @example Usage
+ * ```ts ignore
+ * import { randomUserAgent } from "@p1n2o/utils/user-agent";
+ *
+ * const ua = randomUserAgent()
+ * console.log(ua)
+ * // Outputs:
+ * // {
+ * //   browser: { name: "Chrome", version: "58.0.3029.110", version_major: 58 },
+ * //   device: { brand: null, model: null, name: "Other" },
+ * //   os: { name: "Windows NT", version: "10.0", version_major: 10 },
+ * //   type: {
+ * //     bot: false,
+ * //     mobile: false,
+ * //     pc: true,
+ * //     tablet: false,
+ * //     touch_capable: false
+ * //   },
+ * //   ua: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36"
+ * // }
+ * ```
+ */
+function randomUserAgent(): string {
+  return navigator.userAgent;
+}
+
+export { parseUserAgent, randomUserAgent, type UserAgentInfo };
