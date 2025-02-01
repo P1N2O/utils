@@ -10,7 +10,7 @@
     "start": "deno run --watch -A playground.ts",
     "format": "deno fmt",
     "lint": "deno lint",
-    "publish": "deno run --allow-read --allow-run scripts/publish.ts"
+    "publish": "deno run --allow-read --allow-write --allow-run script/publish.ts"
   },
   "imports": {
     "@commitlint/cli": "npm:@commitlint/cli",
@@ -30,7 +30,7 @@
       ".github",
       ".cache",
       ".vscode",
-      "scripts",
+      "script",
       "playground.ts"
     ]
   },
