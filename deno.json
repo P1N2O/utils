@@ -10,6 +10,7 @@
     "start": "deno run --watch -A playground.ts",
     "format": "deno fmt",
     "lint": "deno lint",
+    "update": "deno outdated --update",
     "publish": "deno run --allow-read --allow-write --allow-run script/publish.ts"
   },
   "imports": {
