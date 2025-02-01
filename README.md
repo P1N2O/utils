@@ -57,4 +57,4 @@ console.log(ua);
 
 ## License
 
-This code is licensed under MIT license
+MIT License
