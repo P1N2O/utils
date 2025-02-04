@@ -26,12 +26,18 @@ jobs:
         run: echo "tag=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
 
       - name: Create GitHub Release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+        uses: ncipollo/release-action@v1
         with:
-          tag_name: ${{ github.ref }}
-          release_name: Release v${{ github.ref }}
-          body: "Changelog: https://github.com/P1N2O/utils/compare/${{ env.prev_tag }}...${{ env.tag }}"
-          draft: false
-          prerelease: false
+          name: Release v${{ github.ref }}
+          artifacts: "release.tar.gz"
+          # body: Changelog https://github.com/P1N2O/utils/compare/${{ env.prev_tag }}...${{ env.tag }}
+          generateReleaseNotes: true
+
+        # env:
+        #   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+        # with:
+        #   tag_name: ${{ github.ref }}
+        #   release_name: Release v${{ github.ref }}
+        #   body: "Changelog: https://github.com/P1N2O/utils/compare/${{ env.prev_tag }}...${{ env.tag }}"
+        #   draft: false
+        #   prerelease: false
