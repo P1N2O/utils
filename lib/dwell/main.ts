@@ -2,11 +2,11 @@
 // This code is licensed under MIT license (see LICENSE for details)
 
 /**
- * DO NOT USE THIS MODULE UNLESS YOU KNOW WHAT IT IS!
+ * ⚠️ DO NOT USE THIS MODULE UNLESS YOU KNOW WHAT IT IS!
  *
  * @example Usage
  * ```ts ignore
- * import { sortArray, getPreviewData } from "@p1n2o/utils/xenon";
+ * import { sortArray, getPreviewData } from "@p1n2o/utils/dwell";
  *
  * const arr = [...]
  * console.log(sortArray(arr, "name", "asc"))
@@ -25,7 +25,7 @@
  *
  * @example Usage
  * ```ts ignore
- * import { sortArray } from "@p1n2o/utils/xenon";
+ * import { sortArray } from "@p1n2o/utils/dwell";
  *
  * const arr = [...]
  * console.log(sortArray(arr, "name", "asc"))
@@ -56,7 +56,7 @@ function sortArray<T>(
  *
  * @example Usage
  * ```ts ignore
- * import { getPreviewData } from "@p1n2o/utils/xenon";
+ * import { getPreviewData } from "@p1n2o/utils/dwell";
  *
  * const arr = [...]
  * console.log(getPreviewData(arr, "name", "asc"))
