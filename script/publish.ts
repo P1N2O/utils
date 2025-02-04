@@ -1,4 +1,4 @@
-import { bumpSemver } from "@p1n2o/utils";
+import { bumpSemVer } from "@p1n2o/utils";
 import { parseArgs } from "@std/cli/parse-args";
 
 const args = parseArgs(Deno.args);
@@ -27,7 +27,7 @@ if (ver) {
   const jsrVersion =
     (await (await fetch(`https://jsr.io/${config.name}/meta.json`))
       .json())?.latest;
-  pubVersion = bumpSemver(jsrVersion);
+  pubVersion = bumpSemVer(jsrVersion);
 }
 
 console.log(`Trying to Publishing v${pubVersion}\n`);
@@ -62,7 +62,7 @@ async function createTag() {
   } else {
     console.log(new TextDecoder().decode(code === 0 ? stdout : stderr));
     // Bump Version and retry
-    pubVersion = bumpSemver(pubVersion);
+    pubVersion = bumpSemVer(pubVersion);
     await updateConfigVer();
     await createTag();
   }
