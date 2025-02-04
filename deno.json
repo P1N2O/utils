@@ -1,7 +1,7 @@
 {
   "name": "@p1n2o/utils",
   "description": "A collection of utility functions for common JavaScript/TypeScript tasks",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "author": {
     "name": "Manuel Pinto",
     "email": "manuel@pinto.dev"
