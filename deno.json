@@ -20,7 +20,8 @@
     "@commitlint/config-conventional": "npm:@commitlint/config-conventional",
     "@commitlint/types": "npm:@commitlint/types",
     "@p1n2o/utils": "./mod.ts",
-    "lefthook": "npm:lefthook"
+    "lefthook": "npm:lefthook",
+    "@std/cli/parse-args": "jsr:@std/cli/parse-args"
   },
   "exports": {
     ".": "./mod.ts",
