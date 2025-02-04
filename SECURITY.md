@@ -9,4 +9,4 @@
 
 ## Reporting a Vulnerability
 
-[Create an issue here](https://github.com/P1N2O/utils/issues/new?template=Blank+issue)
+[Create an issue here](https://github.com/P1N2O/utils/issues/new?template=bug_report.md)
