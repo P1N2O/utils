@@ -23,7 +23,8 @@
   },
   "exports": {
     ".": "./mod.ts",
-    "./user-agent": "./lib/user-agent/main.ts"
+    "./user-agent": "./lib/user-agent/main.ts",
+    "./dwell": "./lib/dwell/main.ts"
   },
   "publish": {
     "exclude": [
@@ -35,6 +36,13 @@
       "script",
       "playground.ts"
     ]
+  },
+  "lint": {
+    "rules": {
+      "exclude": [
+        "no-explicit-any"
+      ]
+    }
   },
   "compilerOptions": {
     "strict": true
