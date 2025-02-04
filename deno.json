@@ -30,9 +30,6 @@
     "./sem-ver": "./lib/sem-ver/main.ts"
   },
   "publish": {
-    "include": [
-      "README.md"
-    ],
     "exclude": [
       "node_modules",
       ".git",
@@ -41,10 +38,12 @@
       ".vscode",
       "script",
       "commitlint.config.ts",
+      "CODE_OF_CONDUCT.md",
+      "CONTRIBUTING.md",
+      "SECURITY.md",
       "deno.lock",
       "lefthook.yml",
-      "playground.ts",
-      "*.md"
+      "playground.ts"
     ]
   },
   "lint": {
