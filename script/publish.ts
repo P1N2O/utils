@@ -96,8 +96,8 @@ async function pushTag(version: string = pubVersion) {
  */
 async function updateConfigVer(version: string = pubVersion) {
   if (config.version !== version) {
-    config.version = version;
     console.log(`Bumping ${file} from v${config.version} to v${version}`);
+    config.version = version;
     // Update the file
     await Deno.writeTextFile(
       file,
