@@ -1,7 +1,7 @@
 {
   "name": "@p1n2o/utils",
   "description": "A collection of utility functions for common JavaScript/TypeScript tasks",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "author": {
     "name": "Manuel Pinto",
     "email": "manuel@pinto.dev"
@@ -30,7 +30,9 @@
     "./sem-ver": "./lib/sem-ver/main.ts"
   },
   "publish": {
-    "include": ["README.md"],
+    "include": [
+      "README.md"
+    ],
     "exclude": [
       "node_modules",
       ".git",
