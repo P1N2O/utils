@@ -12,7 +12,8 @@
     "format": "deno fmt",
     "lint": "deno lint",
     "update": "deno outdated --update",
-    "publish": "deno run --allow-read --allow-write --allow-run script/publish.ts"
+    "get:tag:gh": "curl -s \"https://api.github.com/repos/p1n2o/utils/tags\" | grep -o '\"name\": *\"v[^\"]*' | awk -F'\"' '{print $4}' | sort -V | tail -n 1",
+    "publish": "deno run --allow-read --allow-write --allow-run --allow-net script/publish.ts"
   },
   "imports": {
     "@commitlint/cli": "npm:@commitlint/cli",
@@ -23,8 +24,8 @@
   },
   "exports": {
     ".": "./mod.ts",
-    "./user-agent": "./lib/user-agent/main.ts",
-    "./dwell": "./lib/dwell/main.ts"
+    "./dwell": "./lib/dwell/main.ts",
+    "./user-agent": "./lib/user-agent/main.ts"
   },
   "publish": {
     "exclude": [

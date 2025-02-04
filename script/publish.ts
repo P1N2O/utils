@@ -1,35 +1,53 @@
-const file = "deno.json";
+const ver = Deno.args[0];
+const configFileName = Deno.args[1] || "deno.json";
 
-const fileContentString = await Deno.readTextFile(file);
-const fileContentJson = JSON.parse(fileContentString);
-let version = JSON.parse(fileContentString).version;
+const readConfigFile = await Deno.readTextFile(configFileName);
+const config = JSON.parse(readConfigFile);
+// let version = config.version;
 
-console.log(`Publishing v${version}\n`);
+// Get Latest Published Tag from GitHub
+// const ghRepo = JSON.parse(readConfigFile).name.replace("@", "");
+// const ghTags =
+//   await (await fetch(`https://api.github.com/repos/${ghRepo}/tags`))
+//     .json();
+// const ghLatestTag = ghTags.map((tag: any) => tag.name).sort((a: any, b: any) =>
+//   a.localeCompare(b, undefined, { numeric: true })
+// ).pop();
 
-if (version) {
+// Get Latest Published Tag from JSR
+const jsrMetaData =
+  await (await fetch(`https://jsr.io/${config.name}/meta.json`))
+    .json();
+const jsrLatestVer = jsrMetaData?.latest;
+
+let pubVersion = ver || bumpVersion(jsrLatestVer);
+
+console.log(`Publishing v${pubVersion}\n`);
+
+if (pubVersion) {
   await createTag();
 } else {
-  console.error(`Version not found in ${file}`);
+  console.error(`No version specified!`);
   Deno.exit(1);
 }
 
 async function createTag() {
-  console.log(`Creating Tag v${version}`);
+  console.log(`Creating Tag v${pubVersion}`);
 
   const tagCmd = new Deno.Command("git", {
     args: [
       "tag",
       "-a",
-      `v${version}`,
+      `v${pubVersion}`,
       "-m",
-      `Release v${version}`,
+      `Release v${pubVersion}`,
     ],
   });
   const res = await tagCmd.output();
   const { code, stdout, stderr } = res;
 
   if (code === 0) {
-    console.log(`Successfully Created Tag v${version}!`);
+    console.log(`Successfully Created Tag v${pubVersion}!`);
     await pushTag();
   } else {
     console.log(new TextDecoder().decode(code === 0 ? stdout : stderr));
@@ -44,16 +62,16 @@ async function pushTag() {
     args: [
       "push",
       "origin",
-      `v${version}`,
+      `v${pubVersion}`,
     ],
   });
   const { code, stdout, stderr } = await pushCmd.output();
   console.log(new TextDecoder().decode(code === 0 ? stdout : stderr));
 
   if (code === 0) {
-    console.log(`Successfully published v${version}!`);
+    console.log(`Successfully published v${pubVersion}!`);
   } else {
-    console.error(`Failed to publish v${version}`);
+    console.error(`Failed to publish v${pubVersion}`);
     Deno.exit(1);
   }
 }
@@ -67,27 +85,27 @@ function bumpVersion(version: string): string {
 
 async function bumpAndPush() {
   // Bump version
-  version = bumpVersion(version);
-  fileContentJson.version = version;
-  console.log(`Bumping to v${version}`);
+  pubVersion = bumpVersion(pubVersion);
+  config.version = pubVersion;
+  console.log(`Bumping to v${pubVersion}`);
 
   // Update deno.json
   await Deno.writeTextFile(
-    file,
-    JSON.stringify(fileContentJson, null, 2) + "\n",
+    configFileName,
+    JSON.stringify(config, null, 2) + "\n",
   );
-  console.log(`Updated ${file} to v${version}`);
+  console.log(`Updated ${configFileName} to v${pubVersion}`);
 
   // Commit the change
-  await new Deno.Command("git", { args: ["add", file] })
+  await new Deno.Command("git", { args: ["add", configFileName] })
     .output();
   await new Deno.Command("git", {
     args: [
       "commit",
       "-m",
-      `chore(release): bump version number to v${version}`,
+      `chore(release): bump version number to v${pubVersion}`,
     ],
   }).output();
   await new Deno.Command("git", { args: ["push"] }).output();
-  console.log(`Successfully bumped to v${version} and pushed!`);
+  console.log(`Successfully bumped to v${pubVersion} and pushed!`);
 }
