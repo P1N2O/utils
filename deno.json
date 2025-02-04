@@ -40,7 +40,8 @@
       "commitlint.config.ts",
       "deno.lock",
       "lefthook.yml",
-      "playground.ts"
+      "playground.ts",
+      "*.md"
     ]
   },
   "lint": {
