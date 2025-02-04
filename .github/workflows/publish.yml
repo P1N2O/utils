@@ -13,4 +13,20 @@ jobs:
       id-token: write # The OIDC ID token is used for authentication with JSR.
     steps:
       - uses: actions/checkout@v4
-      - run: npx jsr publish
+
+      - name: Publish to JSR
+        run: npx jsr publish
+
+      - name: Get previous tag
+        id: prev_tag
+        run: echo "tag=$(git describe --tags --abbrev=0 $(git rev-list --tags --max-count=2 | tail -n1))" >> $GITHUB_ENV
+
+      - name: Get current tag
+        id: current_tag
+        run: echo "tag=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
+
+      - name: Create GitHub Release
+        run: |
+          gh release create ${{ env.tag }} --generate-notes --notes "Changelog: https://github.com/P1N2O/utils/compare/${{ env.prev_tag }}...${{ env.tag }}"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
