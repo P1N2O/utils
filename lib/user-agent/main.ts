@@ -166,4 +166,8 @@ function randomUserAgent(): string {
   return navigator.userAgent;
 }
 
-export { parseUserAgent, randomUserAgent, type UserAgentInfo };
+export {
+  parseUserAgent as parse,
+  randomUserAgent as random,
+  type UserAgentInfo,
+};

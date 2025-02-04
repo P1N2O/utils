@@ -1,5 +1,5 @@
-import { bumpSemVer } from "@p1n2o/utils";
 import { parseArgs } from "@std/cli/parse-args";
+import { bump } from "../lib/sem-ver/main.ts";
 
 const args = parseArgs(Deno.args);
 const ver = args.ver;
@@ -27,7 +27,7 @@ if (ver) {
   const jsrVersion =
     (await (await fetch(`https://jsr.io/${config.name}/meta.json`))
       .json())?.latest;
-  pubVersion = bumpSemVer(jsrVersion);
+  pubVersion = bump(jsrVersion);
 }
 
 console.log(`Trying to Publishing v${pubVersion}\n`);
@@ -62,7 +62,7 @@ async function createTag() {
   } else {
     console.log(new TextDecoder().decode(code === 0 ? stdout : stderr));
     // Bump Version and retry
-    pubVersion = bumpSemVer(pubVersion);
+    pubVersion = bump(pubVersion);
     await updateConfigVer();
     await createTag();
   }

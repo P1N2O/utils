@@ -26,7 +26,8 @@
   "exports": {
     ".": "./mod.ts",
     "./dwell": "./lib/dwell/main.ts",
-    "./user-agent": "./lib/user-agent/main.ts"
+    "./user-agent": "./lib/user-agent/main.ts",
+    "./sem-ver": "./lib/sem-ver/main.ts"
   },
   "publish": {
     "exclude": [
