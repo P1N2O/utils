@@ -3,6 +3,7 @@
 
 /**
  * DO NOT USE THIS MODULE UNLESS YOU KNOW WHAT IT IS!
+ *
  * @example Usage
  * ```ts ignore
  * import { sortArray, getPreviewData } from "@p1n2o/utils/xenon";

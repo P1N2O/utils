@@ -6,13 +6,13 @@
  *
  * @example Usage
  * ```ts ignore
- * import { bumpSemver } from "@p1n2o/utils";
+ * import { bumpSemVer } from "@p1n2o/utils";
  *
  * const version = 1.0.0
- * console.log(bumpSemver(version, "major")) // Outputs: 2.0.0
- * console.log(bumpSemver(version, "minor")) // Outputs: 1.1.0
- * console.log(bumpSemver(version, "patch")) // Outputs: 1.0.1
- * console.log(bumpSemver(version)) // Outputs: 1.0.1
+ * console.log(bumpSemVer(version, "major")) // Outputs: 2.0.0
+ * console.log(bumpSemVer(version, "minor")) // Outputs: 1.1.0
+ * console.log(bumpSemVer(version, "patch")) // Outputs: 1.0.1
+ * console.log(bumpSemVer(version)) // Outputs: 1.0.1
  * ```
  */
 function bumpSemVer(
