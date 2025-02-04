@@ -6,10 +6,9 @@
  *
  *  * @example Usage
  * ```ts ignore
- * import { parseUserAgent, randomUserAgent } from "@p1n2o/utils/user-agent";
+ * import { parse, random } from "@p1n2o/utils/user-agent";
  *
- * const ua = parseUserAgent(randomUserAgent)
- * console.log(ua)
+ * console.log(parse(random))
  * // Outputs:
  * // {
  * //   browser: { name: "Chrome", version: "58.0.3029.110", version_major: 58 },
@@ -65,9 +64,9 @@ type UserAgentInfo = {
  *
  * @example Usage
  * ```ts ignore
- * import { parseUserAgent } from "@p1n2o/utils/user-agent";
+ * import { parse } from "@p1n2o/utils/user-agent";
  *
- * const ua = parseUserAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36")
+ * const ua = parse("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36")
  * console.log(ua)
  * // Outputs:
  * // {
@@ -142,10 +141,9 @@ function parseUserAgent(userAgent: string): UserAgentInfo {
  *
  * @example Usage
  * ```ts ignore
- * import { randomUserAgent } from "@p1n2o/utils/user-agent";
+ * import { random } from "@p1n2o/utils/user-agent";
  *
- * const ua = randomUserAgent()
- * console.log(ua)
+ * console.log(random())
  * // Outputs:
  * // {
  * //   browser: { name: "Chrome", version: "58.0.3029.110", version_major: 58 },
