@@ -3,8 +3,6 @@
 
 /**
  * DO NOT USE THIS MODULE UNLESS YOU KNOW WHAT IT IS!
- * This module contains project specific utility functions.
- *
  * @example Usage
  * ```ts ignore
  * import { sortArray, getPreviewData } from "@p1n2o/utils/xenon";
