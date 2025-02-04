@@ -30,6 +30,7 @@
     "./sem-ver": "./lib/sem-ver/main.ts"
   },
   "publish": {
+    "include": ["README.md"],
     "exclude": [
       "node_modules",
       ".git",
