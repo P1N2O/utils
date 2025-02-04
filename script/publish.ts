@@ -25,6 +25,7 @@ let pubVersion = ver || bumpVersion(jsrLatestVer);
 console.log(`Publishing v${pubVersion}\n`);
 
 if (pubVersion) {
+  await bumpAndPush();
   await createTag();
 } else {
   console.error(`No version specified!`);
