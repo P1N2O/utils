@@ -28,31 +28,18 @@ bunx jsr add @p1n2o/utils
 
 ### For other package managers
 
-Check the [JSR page for more details](https://jsr.io/@p1n2o/utils).
+Check out on [JSR](https://jsr.io/@p1n2o/utils) for more details.
 
 ## Example
 
 ```ts ignore
-import { parseUserAgent } from "@p1n2o/utils/user-agent";
+import { bump } from "@p1n2o/utils/sem-ver";
 
-const ua = parseUserAgent(
-  "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36",
-);
-console.log(ua);
-// Outputs:
-// {
-//   browser: { name: "Chrome", version: "58.0.3029.110", version_major: 58 },
-//   device: { brand: null, model: null, name: "Other" },
-//   os: { name: "Windows NT", version: "10.0", version_major: 10 },
-//   type: {
-//     bot: false,
-//     mobile: false,
-//     pc: true,
-//     tablet: false,
-//     touch_capable: false
-//   },
-//   ua: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36"
-// }
+const version = "1.0.0";
+console.log(bump(version, "major")); // Outputs: 2.0.0
+console.log(bump(version, "minor")); // Outputs: 1.1.0
+console.log(bump(version, "patch")); // Outputs: 1.0.1
+console.log(bump(version)); // Outputs: 1.0.1
 ```
 
 ## License

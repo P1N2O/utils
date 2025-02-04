@@ -8,7 +8,7 @@
  * ```ts ignore
  * import { parse, random } from "@p1n2o/utils/user-agent";
  *
- * console.log(parse(random))
+ * console.log(parse(random));
  * // Outputs:
  * // {
  * //   browser: { name: "Chrome", version: "58.0.3029.110", version_major: 58 },
@@ -66,8 +66,7 @@ type UserAgentInfo = {
  * ```ts ignore
  * import { parse } from "@p1n2o/utils/user-agent";
  *
- * const ua = parse("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36")
- * console.log(ua)
+ * console.log(parse("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36"));
  * // Outputs:
  * // {
  * //   browser: { name: "Chrome", version: "58.0.3029.110", version_major: 58 },
@@ -143,7 +142,7 @@ function parseUserAgent(userAgent: string): UserAgentInfo {
  * ```ts ignore
  * import { random } from "@p1n2o/utils/user-agent";
  *
- * console.log(random())
+ * console.log(random());
  * // Outputs:
  * // {
  * //   browser: { name: "Chrome", version: "58.0.3029.110", version_major: 58 },

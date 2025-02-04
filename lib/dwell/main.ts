@@ -8,9 +8,9 @@
  * ```ts ignore
  * import { sortArray, getPreviewData } from "@p1n2o/utils/dwell";
  *
- * const arr = [...]
- * console.log(sortArray(arr, "name", "asc"))
- * console.log(getPreviewData(arr, "name", "asc"))
+ * const arr = [...];
+ * console.log(sortArray(arr, "name", "asc"));
+ * console.log(getPreviewData(arr, "name", "asc"));
  * ```
  * @module
  */
@@ -27,8 +27,8 @@
  * ```ts ignore
  * import { sortArray } from "@p1n2o/utils/dwell";
  *
- * const arr = [...]
- * console.log(sortArray(arr, "name", "asc"))
+ * const arr = [...];
+ * console.log(sortArray(arr, "name", "asc"));
  * ```
  */
 function sortArray<T>(
@@ -58,8 +58,8 @@ function sortArray<T>(
  * ```ts ignore
  * import { getPreviewData } from "@p1n2o/utils/dwell";
  *
- * const arr = [...]
- * console.log(getPreviewData(arr, "name", "asc"))
+ * const arr = [...];
+ * console.log(getPreviewData(arr, "name", "asc"));
  * ```
  */
 function getPreviewData<T>(
