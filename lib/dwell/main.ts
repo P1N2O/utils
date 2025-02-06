@@ -208,4 +208,56 @@ const logout = ({
   if (callbackFn) callbackFn();
 };
 
-export { getFragment, getPreviewData, login, logout, sortArray };
+const handleAuth = (
+  { onAuth, onUnauth, afterAuth }: {
+    onAuth?: () => any;
+    onUnauth?: () => any;
+    afterAuth?: () => any;
+  },
+): Promise<void> => {
+  return new Promise<void>((resolve, reject) => {
+    if (globalThis.location.href.includes("access_token")) {
+      afterAuth
+        ? afterAuth().then(resolve).catch(reject)
+        : defaultAfterAuth().then(resolve).catch(reject);
+    } else if (sessionExpired()) {
+      onUnauth ? onUnauth().then(resolve).catch(reject) : resolve();
+    } else {
+      onAuth ? onAuth().then(resolve).catch(reject) : resolve();
+    }
+  });
+};
+
+const defaultAfterAuth = (): Promise<void> => {
+  return new Promise<void>((resolve, reject) => {
+    try {
+      // Set access token
+      localStorage.setItem(
+        "access_token",
+        getFragment() as string,
+      );
+      // Cleanup URL
+      const w = globalThis as any;
+      w.history.replaceState(
+        null,
+        "",
+        w.location.href.split("#")[0],
+      );
+      resolve();
+    } catch (error) {
+      console.error(error);
+      reject(error);
+    }
+  });
+};
+
+const sessionExpired = (): boolean =>
+  !localStorage.getItem("access_token") ||
+  parseToken(localStorage.getItem("access_token") || "")?.exp <=
+    Date.now() / 1000;
+
+const parseToken = (token: string): any => {
+  return JSON.parse(atob(token.split(".")[1]));
+};
+
+export { getFragment, getPreviewData, handleAuth, login, logout, sortArray };
