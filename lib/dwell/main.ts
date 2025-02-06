@@ -221,7 +221,7 @@ const handleAuth = (
         ? afterAuth().then(resolve).catch(reject)
         : defaultAfterAuth().then(resolve).catch(reject);
     } else if (sessionExpired()) {
-      onUnauth ? onUnauth().then(resolve).catch(reject) : resolve();
+      onUnauth ? onUnauth().then(resolve).catch(reject) : reject();
     } else {
       onAuth ? onAuth().then(resolve).catch(reject) : resolve();
     }
