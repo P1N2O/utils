@@ -300,7 +300,7 @@ const parseToken = (token: string): any => {
  * console.log(accessToken());
  * ```
  */
-const accessToken = (key?: string): string | null => {
+const accessToken = (key?: string): any => {
   return parseToken(localStorage.getItem(key || "access_token") || "");
 };
 
