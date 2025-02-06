@@ -272,8 +272,45 @@ const sessionExpired = (): boolean =>
   parseToken(localStorage.getItem("access_token") || "")?.exp <=
     Date.now() / 1000;
 
+/**
+ * Parse token
+ * @param token Token to parse
+ * @returns The parsed token
+ *
+ * @example Usage
+ * ```ts ignore
+ * import { parseToken } from "@p1n2o/utils/dwell";
+ *
+ * console.log(parseToken("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9"));
+ * ```
+ */
 const parseToken = (token: string): any => {
   return JSON.parse(atob(token.split(".")[1]));
 };
 
-export { auth, getFragment, getPreviewData, login, logout, sortArray };
+/**
+ * Get access token
+ * @param key The access token key
+ * @returns The access token
+ *
+ * @example Usage
+ * ```ts ignore
+ * import { accessToken } from "@p1n2o/utils/dwell";
+ *
+ * console.log(accessToken());
+ * ```
+ */
+const accessToken = (key?: string): string | null => {
+  return parseToken(localStorage.getItem(key || "access_token") || "");
+};
+
+export {
+  accessToken,
+  auth,
+  getFragment,
+  getPreviewData,
+  login,
+  logout,
+  parseToken,
+  sortArray,
+};
