@@ -209,9 +209,9 @@ const logout = ({
  *
  * @example Usage
  * ```ts ignore
- * import { handleAuth } from "@p1n2o/utils/dwell";
+ * import { auth } from "@p1n2o/utils/dwell";
  *
- * handleAuth({
+ * auth({
  *   onAuth: () => {
  *     // Your callback function
  *   },
@@ -224,7 +224,7 @@ const logout = ({
  * });
  * ```
  */
-const handleAuth = (
+const auth = (
   { onAuth, onUnauth, afterAuth }: {
     onAuth?: () => any;
     onUnauth?: () => any;
@@ -276,4 +276,4 @@ const parseToken = (token: string): any => {
   return JSON.parse(atob(token.split(".")[1]));
 };
 
-export { getFragment, getPreviewData, handleAuth, login, logout, sortArray };
+export { auth, getFragment, getPreviewData, login, logout, sortArray };
