@@ -110,11 +110,8 @@ function getPreviewData<T>(
 }
 
 /**
- * Login
- * @param clientId The Client ID of the application
- * @param serviceUrl The Service URL of the application
- * @param redirectUrl The Redirect URL after login
- * @param callbackFn The callback function to call after login
+ * Handle login
+ * @param param Login option parameters
  *
  * @example Usage
  * ```ts ignore
@@ -169,11 +166,8 @@ const getFragment = (key?: string): string | null => {
 };
 
 /**
- * Logout
- * @param clientId The Client ID of the application
- * @param serviceUrl The Service URL of the application
- * @param redirectUrl The Redirect URL after logout
- * @param callbackFn The callback function to call after logout
+ * Handle logout
+ * @param param Logout option parameters
  *
  * @example Usage
  * ```ts ignore
@@ -208,6 +202,28 @@ const logout = ({
   if (callbackFn) callbackFn();
 };
 
+/**
+ * Handle authentication
+ * @param param Authentication callbacks
+ * @returns {Promise<void>} A promise that resolves when authentication is complete
+ *
+ * @example Usage
+ * ```ts ignore
+ * import { handleAuth } from "@p1n2o/utils/dwell";
+ *
+ * handleAuth({
+ *   onAuth: () => {
+ *     // Your callback function
+ *   },
+ *   onUnauth: () => {
+ *     // Your callback function
+ *   },
+ *   afterAuth: () => {
+ *     // Your callback function
+ *   },
+ * });
+ * ```
+ */
 const handleAuth = (
   { onAuth, onUnauth, afterAuth }: {
     onAuth?: () => any;
