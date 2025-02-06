@@ -251,7 +251,6 @@ const auth = ({
 };
 
 const defaultAfterAuth = (): any => {
-  console.log("Default after auth");
   try {
     // Set access token
     localStorage.setItem("access_token", getFragment() as string);
