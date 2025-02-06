@@ -127,12 +127,7 @@ function getPreviewData<T>(
  * });
  * ```
  */
-const login = ({
-  clientId,
-  serviceUrl,
-  redirectUrl,
-  callbackFn,
-}: {
+const login = ({ clientId, serviceUrl, redirectUrl, callbackFn }: {
   clientId: string;
   serviceUrl: string;
   redirectUrl?: string;
@@ -224,47 +219,48 @@ const logout = ({
  * });
  * ```
  */
-const auth = (
-  { onAuth, onUnauth, afterAuth }: {
-    onAuth?: () => any;
-    onUnauth?: () => any;
-    afterAuth?: () => any;
-  },
-): Promise<void> => {
+const auth = ({
+  onAuth,
+  onUnauth,
+  afterAuth,
+}: {
+  onAuth?: () => any;
+  onUnauth?: () => any;
+  afterAuth?: () => any;
+}): any => {
   return new Promise<void>((resolve, reject) => {
-    if (globalThis.location.href.includes("access_token")) {
-      afterAuth
-        ? afterAuth().then(resolve).catch(reject)
-        : defaultAfterAuth().then(resolve).catch(reject);
-    } else if (sessionExpired()) {
-      onUnauth ? onUnauth().then(resolve).catch(reject) : reject();
-    } else {
-      onAuth ? onAuth().then(resolve).catch(reject) : resolve();
-    }
+    const processAuth = async () => {
+      try {
+        if (globalThis.location.href.includes("access_token")) {
+          await (afterAuth ? afterAuth() : defaultAfterAuth());
+        }
+        if (!sessionExpired()) {
+          if (onAuth) await onAuth();
+          resolve();
+        } else {
+          onUnauth ? await onUnauth() : reject(new Error("Session expired"));
+        }
+      } catch (error) {
+        console.error("Authentication Error: ", error);
+        reject(error);
+      }
+    };
+
+    processAuth();
   });
 };
 
-const defaultAfterAuth = (): Promise<void> => {
-  return new Promise<void>((resolve, reject) => {
-    try {
-      // Set access token
-      localStorage.setItem(
-        "access_token",
-        getFragment() as string,
-      );
-      // Cleanup URL
-      const w = globalThis as any;
-      w.history.replaceState(
-        null,
-        "",
-        w.location.href.split("#")[0],
-      );
-      resolve();
-    } catch (error) {
-      console.error(error);
-      reject(error);
-    }
-  });
+const defaultAfterAuth = (): any => {
+  console.log("Default after auth");
+  try {
+    // Set access token
+    localStorage.setItem("access_token", getFragment() as string);
+    // Cleanup URL
+    const w = globalThis as any;
+    w.history.replaceState(null, "", w.location.href.split("#")[0]);
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 const sessionExpired = (): boolean =>
