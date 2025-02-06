@@ -109,4 +109,103 @@ function getPreviewData<T>(
   return result;
 }
 
-export { getPreviewData, sortArray };
+/**
+ * Login
+ * @param clientId The Client ID of the application
+ * @param serviceUrl The Service URL of the application
+ * @param redirectUrl The Redirect URL after login
+ * @param callbackFn The callback function to call after login
+ *
+ * @example Usage
+ * ```ts ignore
+ * import { login } from "@p1n2o/utils/dwell";
+ *
+ * login({
+ *   clientId: "YOUR_CLIENT_ID",
+ *   serviceUrl: "https://YOUR_SERVICE_URL",
+ *   redirectUrl: "https://YOUR_REDIRECT_URL",
+ *   callbackFn: () => {
+ *     // Your callback function
+ *   },
+ * });
+ * ```
+ */
+const login = ({
+  clientId,
+  serviceUrl,
+  redirectUrl,
+  callbackFn,
+}: {
+  clientId: string;
+  serviceUrl: string;
+  redirectUrl?: string;
+  callbackFn?: () => void;
+}): void => {
+  const params = new URLSearchParams({
+    client_id: clientId,
+    response_type: "token+id_token",
+    redirect_uri: redirectUrl ?? globalThis.location.href,
+  });
+  globalThis.location.href =
+    `${serviceUrl}/oauth/authorize?${params.toString()}`;
+  if (callbackFn) callbackFn();
+};
+
+/**
+ * Get fragment value from URL
+ * @param key The fragment key
+ * @returns The fragment string
+ *
+ * @example Usage
+ * ```ts ignore
+ * import { getFragment } from "@p1n2o/utils/dwell";
+ * console.log(getFragment("access_token"));
+ * ```
+ */
+const getFragment = (key?: string): string | null => {
+  const url = new URL(globalThis.location.href);
+  const fragment = new URLSearchParams(url.hash.slice(1)); // Removes the '#' character
+  return fragment.get(key || "access_token") || null;
+};
+
+/**
+ * Logout
+ * @param clientId The Client ID of the application
+ * @param serviceUrl The Service URL of the application
+ * @param redirectUrl The Redirect URL after logout
+ * @param callbackFn The callback function to call after logout
+ *
+ * @example Usage
+ * ```ts ignore
+ * import { logout } from "@p1n2o/utils/dwell";
+ *
+ * logout({
+ *   clientId: "YOUR_CLIENT_ID",
+ *   serviceUrl: "https://YOUR_SERVICE_URL",
+ *   redirectUrl: "https://YOUR_REDIRECT_URL",
+ *   callbackFn: () => {
+ *     // Your callback function
+ *   },
+ * });
+ * ```
+ */
+const logout = ({
+  clientId,
+  serviceUrl,
+  redirectUrl,
+  callbackFn,
+}: {
+  clientId: string;
+  serviceUrl: string;
+  redirectUrl?: string;
+  callbackFn?: () => any;
+}): void => {
+  const params = new URLSearchParams({
+    client_id: clientId,
+    redirect_uri: redirectUrl ?? globalThis.location.href,
+  });
+  globalThis.location.href = `${serviceUrl}/logout.do?${params.toString()}`;
+  if (callbackFn) callbackFn();
+};
+
+export { getFragment, getPreviewData, login, logout, sortArray };
