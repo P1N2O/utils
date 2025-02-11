@@ -16,11 +16,16 @@
  */
 
 /**
+ * Sort
+ */
+type Sort = "asc" | "des";
+
+/**
  * Sort an array by a given key.
  *
  * @param array The array to sort.
- * @param key The key to sort by.
- * @param order The order of the sort ("asc" or "des").
+ * @param extractor The key (string) or extractor (function) to sort by.
+ * @param sort Type of sort to apply ("asc" or "des").
  * @returns {Array<T>} Returns the sorted array.
  *
  * @example Usage
@@ -28,21 +33,29 @@
  * import { sortArray } from "@p1n2o/utils/dwell";
  *
  * const arr = [...];
- * console.log(sortArray(arr, "name", "asc"));
+ * console.log(sortArray(arr, "name", "asc")); // Key
+ * console.log(sortArray(arr, "name.value", "asc")); // Key (Nested)
+ * console.log(sortArray(arr, (i) => i.name.value, "asc")); // Extractor Function
  * ```
  */
 function sortArray<T>(
   array: Array<T>,
-  key: keyof T,
-  order: "asc" | "des" = "asc",
+  extractor: string | ((item: T) => any),
+  sort: Sort = "asc",
 ): Array<T> {
   return array.sort((a, b) => {
-    const valueA = a[key];
-    const valueB = b[key];
+    let valueA = typeof extractor === "function"
+      ? extractor(a)
+      : getNestedValue(a, extractor);
+    let valueB = typeof extractor === "function"
+      ? extractor(b)
+      : getNestedValue(b, extractor);
+
+    valueA = normalizeValue(valueA, sort);
+    valueB = normalizeValue(valueB, sort);
 
     if (valueA === valueB) return 0;
-
-    return (valueA < valueB ? -1 : 1) * (order ? 1 : -1);
+    return (valueA < valueB ? -1 : 1) * (sort === "asc" ? 1 : -1);
   });
 }
 
@@ -51,7 +64,7 @@ function sortArray<T>(
  *
  * @param array The array to get preview data from.
  * @param key The key to sort preview data by.
- * @param order The order of the sort ("asc" or "des").
+ * @param sort Type of sort to apply ("asc" or "des").
  * @returns {Array<T>} Returns the preview data array.
  *
  * @example Usage
@@ -64,20 +77,29 @@ function sortArray<T>(
  */
 function getPreviewData<T>(
   array: Array<T>,
-  key: keyof T,
-  order: "asc" | "des" = "asc",
+  extractor: string | ((item: T) => any),
+  sort: Sort = "asc",
 ): Array<T> {
-  // First, sort the array based on the key as you did in sortArray
-  const sortedArray = sortArray(array, key, order);
+  // First, sort the array
+  const sortedArray = sortArray(array, extractor, sort);
 
-  // Filter out items with "None" in the position ke
-  const filteredArray = sortedArray.filter((item: any) =>
-    !!item[key] && item[key] !== "None"
-  );
+  // Extract and normalize values for filtering
+  const filteredArray = sortedArray.filter((item: any) => {
+    const value = typeof extractor === "function"
+      ? extractor(item)
+      : getNestedValue(item, extractor);
+    return value !== "None" && value !== null && value !== undefined;
+  });
 
   // Extract the positions of the filtered items
-  const positions = filteredArray.map((item: any) => parseInt(item[key], 10));
-  const isNumberType = typeof filteredArray[0]?.[key] === "number";
+  const positions = filteredArray.map((item: any) => {
+    const value = typeof extractor === "function"
+      ? extractor(item)
+      : getNestedValue(item, extractor);
+    return parseInt(value, 10);
+  });
+
+  const isNumberType = !isNaN(positions[0]);
 
   // Create the final result array
   const result: Array<T> = [];
@@ -88,7 +110,9 @@ function getPreviewData<T>(
     while (currentPosition < positions[i]) {
       result.push(
         {
-          [key]: isNumberType ? currentPosition : currentPosition.toString(),
+          [extractor as string]: isNumberType
+            ? currentPosition
+            : currentPosition.toString(),
         } as T,
       );
       currentPosition++;
@@ -102,7 +126,13 @@ function getPreviewData<T>(
   // Handle any missing positions after the last item
   const maxPosition = Math.max(...positions);
   while (currentPosition <= maxPosition) {
-    result.push({ [key]: currentPosition.toString() } as T);
+    result.push(
+      {
+        [extractor as string]: isNumberType
+          ? currentPosition
+          : currentPosition.toString(),
+      } as T,
+    );
     currentPosition++;
   }
 
@@ -299,6 +329,20 @@ const accessToken = (key?: string): any => {
   return parseToken(localStorage.getItem(key || "access_token") || "");
 };
 
+// Get Nested Value - Helper Function
+function getNestedValue(obj: any, path: string): any {
+  return path.split(".").reduce((acc, key) => acc?.[key], obj);
+}
+
+// Normalize Value - Helper Function
+function normalizeValue(value: any, sort: Sort = "asc"): number {
+  if (value === "None" || value === null || value === undefined) {
+    return sort === "asc" ? Infinity : -Infinity;
+  }
+  if (!isNaN(value)) return Number(value); // Convert numeric strings to numbers
+  return value; // Return as-is for string comparison
+}
+
 export {
   accessToken,
   auth,
@@ -307,5 +351,6 @@ export {
   login,
   logout,
   parseToken,
+  type Sort,
   sortArray,
 };
