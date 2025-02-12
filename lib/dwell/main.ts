@@ -140,6 +140,22 @@ function getPreviewData<T>(
 }
 
 /**
+ * Deep copy an object
+ * @param obj The object to deep copy
+ * @returns The deep copied object
+ *
+ * @example Usage
+ * ```ts ignore
+ * import { deepCopy } from "@p1n2o/utils/dwell";
+ *
+ * const obj = { a: 1, b: 2 };
+ * const copiedObj = deepCopy(obj);
+ * console.log(copiedObj); // Outputs: { a: 1, b: 2 }
+ * ```
+ */
+const deepCopy = <T>(obj: T): T => JSON.parse(JSON.stringify(obj));
+
+/**
  * Handle login
  * @param param Login option parameters
  *
@@ -346,6 +362,7 @@ function normalizeValue(value: any, sort: Sort = "asc"): number {
 export {
   accessToken,
   auth,
+  deepCopy,
   getFragment,
   getPreviewData,
   login,
