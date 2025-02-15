@@ -1,3 +1,22 @@
+// Copyright (c) 2025 Manuel Pinto
+// This code is licensed under MIT license (see LICENSE for details)
+
+/**
+ * This module contains functions related to [Semantic Versioning](https://semver.org/).
+ *
+ * @example Usage
+ * ```ts ignore
+ * import { bump } from "@p1n2o/utils/sem-ver";
+ *
+ * const version = "1.0.0";
+ * console.log(bump(version, "major")); // Outputs: 2.0.0
+ * console.log(bump(version, "minor")); // Outputs: 1.1.0
+ * console.log(bump(version, "patch")); // Outputs: 1.0.1
+ * console.log(bump(version)); // Outputs: 1.0.1
+ * ```
+ * @module
+ */
+
 /**
  * Semantic Version
  */
