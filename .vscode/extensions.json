@@ -1,5 +1,10 @@
 {
   "recommendations": [
     "denoland.vscode-deno"
+  ],
+  "unwantedRecommendations": [
+    "esbenp.prettier-vscode",
+    "biomejs.vscode-biome",
+    "biomejs.biome"
   ]
 }

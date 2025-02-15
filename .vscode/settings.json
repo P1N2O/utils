@@ -1,4 +1,10 @@
 {
+  "biome.enabled": false,
+  "extensions.disabled": [
+    "esbenp.prettier-vscode",
+    "biomejs.vscode-biome",
+    "biomejs.biome"
+  ],
   "deno.enable": true,
   "editor.inlayHints.enabled": "off",
   "editor.formatOnSave": true,
