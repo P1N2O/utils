@@ -2,7 +2,7 @@
 // This code is licensed under MIT license (see LICENSE for details)
 
 /**
- * This module contains utility functions related to {@link https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/User-Agent | user agent}.
+ * This module contains functions related to {@link https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/User-Agent | user agent}.
  *
  *  * @example Usage
  * ```ts ignore

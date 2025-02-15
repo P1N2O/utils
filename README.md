@@ -1,6 +1,6 @@
 # Utils
 
-A collection of utility functions for common JavaScript/TypeScript tasks
+A collection of utilities for common JavaScript/TypeScript tasks
 
 [![JSR](https://jsr.io/badges/@p1n2o/utils)](https://jsr.io/@p1n2o/utils)
 [![JSR Score](https://jsr.io/badges/@p1n2o/utils/score)](https://jsr.io/@p1n2o/utils/score)

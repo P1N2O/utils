@@ -1,6 +1,6 @@
 {
   "name": "@p1n2o/utils",
-  "description": "A collection of utility functions for common JavaScript/TypeScript tasks",
+  "description": "A collection of utilities for common JavaScript/TypeScript tasks",
   "version": "0.3.15",
   "author": {
     "name": "Manuel Pinto",
