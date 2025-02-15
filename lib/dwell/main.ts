@@ -21,6 +21,21 @@
 type Sort = "asc" | "des";
 
 /**
+ * User
+ */
+type User = {
+  email: string;
+  email_verified: boolean;
+  name: string;
+  family_name: string;
+  given_name: string;
+  previous_login: Date | number | string;
+  sub: string;
+  user_id: string;
+  username: string;
+};
+
+/**
  * Sort an array by a given key.
  *
  * @param array The array to sort.
@@ -244,6 +259,45 @@ const logout = ({
 };
 
 /**
+ * Get user info
+ * @param serviceUrl The service URL
+ * @param token The access token
+ * @returns The user info
+ *
+ * @example Usage
+ * ```ts ignore
+ * import { userInfo } from "@p1n2o/utils/dwell";
+ *
+ * userInfo("https://YOUR_SERVICE_URL", "YOUR_ACCESS_TOKEN").then((user) => {
+ *   console.log(user);
+ * });
+ * // or
+ * const user = await userInfo("https://YOUR_SERVICE_URL", "YOUR_ACCESS_TOKEN");
+ * console.log(user);
+ * ```
+ */
+const userInfo = async (serviceUrl: string, token?: string): Promise<User> => {
+  const api = `${serviceUrl}/userinfo`;
+  try {
+    const res = await fetch(api, {
+      headers: {
+        Authorization: `Bearer ${
+          token || localStorage.getItem("access_token")
+        }`,
+      },
+    });
+    if (!res.ok) {
+      const errorText = await res.text();
+      throw new Error(`HTTP error ${res.status}: ${errorText}`);
+    }
+    return await res.json();
+  } catch (e) {
+    console.error(e);
+    return await Promise.reject(e);
+  }
+};
+
+/**
  * Handle authentication
  * @param param Authentication callbacks
  * @returns {Promise<void>} A promise that resolves when authentication is complete
@@ -370,4 +424,6 @@ export {
   parseToken,
   type Sort,
   sortArray,
+  type User,
+  userInfo,
 };
