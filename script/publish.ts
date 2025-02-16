@@ -1,5 +1,5 @@
 import { parseArgs } from "@std/cli/parse-args";
-import { bump } from "../lib/sem-ver/main.ts";
+import { bump, type SemVer } from "../lib/sem-ver/main.ts";
 
 const args = parseArgs(Deno.args);
 const ver = args.ver;
@@ -8,7 +8,7 @@ const file = args.file || args.fileName || "deno.json";
 const readConfigFile = await Deno.readTextFile(file);
 const config = JSON.parse(readConfigFile);
 
-let pubVersion: string;
+let pubVersion: SemVer;
 
 // Get Latest Published Tag from GitHub
 // const ghRepo = JSON.parse(readConfigFile).name.replace("@", "");
