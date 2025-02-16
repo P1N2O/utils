@@ -10,6 +10,9 @@ pre-commit:
     "lint code":
       run: deno lint {staged_files}
       glob: "*.{js,cjs,mjs,ts,cts,mts,jsx,tsx}"
+    "add copyright":
+      run: deno run add-copyright
+      glob: "*.{js,cjs,mjs,ts,cts,mts,jsx,tsx}"
 
 commit-msg:
   commands:

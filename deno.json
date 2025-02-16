@@ -13,7 +13,8 @@
     "lint": "deno lint",
     "update": "deno outdated --update",
     "get:tag:gh": "curl -s \"https://api.github.com/repos/p1n2o/utils/tags\" | grep -o '\"name\": *\"v[^\"]*' | awk -F'\"' '{print $4}' | sort -V | tail -n 1",
-    "publish": "deno run --allow-read --allow-write --allow-run --allow-net script/publish.ts"
+    "publish": "deno run --allow-read --allow-write --allow-run --allow-net script/publish.ts",
+    "add-copyright": "deno run --allow-read --allow-write script/add-copyright.ts"
   },
   "imports": {
     "@commitlint/cli": "npm:@commitlint/cli",
